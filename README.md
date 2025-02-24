@@ -16,5 +16,5 @@ A simple network sniffer built with Django and Scapy. This application captures 
 
 1. Clone the repository:
    ```bash
-   git clone 
+   git clone https://github.com/ferosinfo/CodeAlpha_sniffer.git
    cd networksniffer
