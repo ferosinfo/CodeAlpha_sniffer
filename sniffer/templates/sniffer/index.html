@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Sniffer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Network Sniffer</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Capture Packets</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="interface" class="form-label">Network Interface</label>
+                        <input type="text" class="form-control" id="interface" name="interface" value="eth0">
+                    </div>
+                    <div class="mb-3">
+                        <label for="count" class="form-label">Number of Packets</label>
+                        <input type="number" class="form-control" id="count" name="count" value="10">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Start Sniffing</button>
+                </form>
+
+                <!-- Display captured packets -->
+                <h5 class="mt-4">Captured Packets</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Source IP</th>
+                            <th>Destination IP</th>
+                            <th>Protocol</th>
+                            <th>Source Port</th>
+                            <th>Destination Port</th>
+                            <th>Payload</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for packet in packets %}
+                        <tr>
+                            <td>{{ packet.timestamp }}</td>
+                            <td>{{ packet.src_ip }}</td>
+                            <td>{{ packet.dst_ip }}</td>
+                            <td>{{ packet.protocol }}</td>
+                            <td>{{ packet.src_port }}</td>
+                            <td>{{ packet.dst_port }}</td>
+                            <td>{{ packet.payload }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
